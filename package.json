@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "esbuild prisma/seed.ts --outfile=node_modules/tmp-seed.cjs --bundle --format=cjs --external:prisma --external:@prisma/client && node node_modules/tmp-seed.cjs --preview-feature"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
     "@xstate/react": "^3.2.2",
+    "esbuild-register": "^3.5.0",
     "immer": "^10.0.2",
     "lodash": "^4.17.21",
     "lucide-react": "^0.268.0",

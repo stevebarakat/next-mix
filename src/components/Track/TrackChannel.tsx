@@ -26,13 +26,14 @@ type Props = {
   track: SourceTrack;
   trackId: number;
   channels: Channel[];
+  currentTracks: TrackSettings[];
 };
 
-function TrackChannel({ track, trackId, channels }: Props) {
+function TrackChannel({ track, trackId, channels, currentTracks }: Props) {
   useTrackAutomationData({ trackId, channels });
-  const currentTracks = MixerMachineContext.useSelector(
-    (state) => state.context.currentTracks
-  );
+  // const currentTracks = MixerMachineContext.useSelector(
+  //   (state) => state.context.currentTracks
+  // );
   const fxNames = MixerMachineContext.useSelector(
     (state) => state.context.currentTracks[trackId].fxNames
   );
@@ -47,7 +48,9 @@ function TrackChannel({ track, trackId, channels }: Props) {
   const reverb = useReverb();
   const pitchShift = usePitchShift();
 
-  const meters = useRef(Array(channels.length).fill(new Meter()));
+  const meters = useRef(
+    Array(channels.length).fill(new Meter().toDestination())
+  );
 
   const { send } = MixerMachineContext.useActorRef();
 
@@ -93,8 +96,9 @@ function TrackChannel({ track, trackId, channels }: Props) {
       }
     }, []);
 
+    if (!channels[trackId]) return;
     channels[trackId].disconnect();
-    channels[trackId].connect(meters.current[2].toDestination());
+    channels[trackId].connect(Destination);
     currentTrackFx.forEach((ctf) => {
       ctf && channels[trackId].chain(ctf, Destination);
     });
@@ -136,8 +140,6 @@ function TrackChannel({ track, trackId, channels }: Props) {
       </TrackPanel>
     );
   };
-
-  console.log("currentTrackFx", currentTrackFx);
 
   return (
     <div className="flex-y gap2">

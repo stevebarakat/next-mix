@@ -1,7 +1,6 @@
 import { Destination, Transport as t } from "tone";
 import Transport from "./Transport";
 import { log, dbToPercent } from "../utils";
-import SongSelect from "./SongSelect";
 import useTracks from "@/hooks/useTracks";
 import Loader from "./Loader";
 import SongInfo from "./SongInfo";
@@ -25,17 +24,12 @@ export const Mixer = ({ currentTracks, sourceSong }) => {
       const scaled = dbToPercent(log(volume));
       Destination.volume.value = scaled;
 
-      currentTracks?.forEach((currentTrack: TrackSettings, trackId: number) => {
-        const value = currentTrack.volume;
+      currentTracks.forEach((currentTrack: TrackSettings, trackId: number) => {
+        const value = currentTrack.volume || -32;
         const scaled = dbToPercent(log(value));
 
         if (channels[trackId]) {
-          channels[trackId].set({
-            volume: scaled,
-            pan: currentTrack.pan,
-            solo: currentTrack.soloMute.solo,
-            mute: currentTrack.soloMute.mute,
-          });
+          channels[trackId].set({ volume: -12 });
         }
       });
     })();
@@ -53,19 +47,19 @@ export const Mixer = ({ currentTracks, sourceSong }) => {
         <div className="mixer">
           <SongInfo song={sourceSong} />
           <div className="channels">
-            {tracks.map((track, i) => (
+            {tracks?.map((track, i) => (
               <TrackChannel
                 key={track.id}
                 track={track}
                 trackId={i}
                 channels={channels}
+                currentTracks={currentTracks}
               />
             ))}
             <Main />
           </div>
           <Transport song={sourceSong} />
         </div>
-        <SongSelect />
       </>
     );
   }

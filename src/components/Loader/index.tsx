@@ -11,23 +11,7 @@ const Spinner = ({ song }: Props) => {
 
   loaded().then(() => send("LOADED"));
 
-  return (
-    <div className="loader">
-      <span>
-        Loading: {song.artist} - {song.title}
-      </span>
-      <div className="spinner">
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-        <div />
-      </div>
-    </div>
-  );
+  return <div className="loader">Loading...</div>;
 };
 
 export default Spinner;

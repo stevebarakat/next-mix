@@ -32,10 +32,9 @@ function Fader({ trackId, channels, meters }: Props) {
     localStorageSet("currentTracks", currentTracks);
   }
 
-  // console.log("volume", volume);
   return (
     <div className="fader-wrap">
-      {/* <div className="window">{`${volume.toFixed(0)} dB`}</div> */}
+      <div className="window">{`${volume.toFixed(0)} dB`}</div>
       <div className="levels-wrap">
         <VuMeter meterValue={meterVal} height={150} width={12} />
       </div>

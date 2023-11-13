@@ -237,7 +237,7 @@ export const mixerMachine = createMachine(
             : sourceSong.start),
 
       loadSong: assign((context, { value }: any): any => {
-        window.location.reload();
+        // window.location.reload();
         localStorageSet("sourceSong", value);
         const currentTracks = value.tracks.map((track: TrackSettings) => ({
           id: crypto.randomUUID(),

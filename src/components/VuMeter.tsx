@@ -46,15 +46,15 @@ function VuMeter({ meterValue, height, width }: MeterProps) {
   }, []);
 
   useEffect(() => {
-    invariant(stage.current, "canvas not initiated");
-    const c = stage.current.getContext("2d");
+    // invariant(stage.current, "canvas not initiated");
+    const c = stage.current?.getContext("2d");
     if (c == null) throw new Error("Could not get context");
 
     const draw = function () {
-      invariant(stage.current, "canvas not initiated");
-      const targetVal: string | undefined = stage.current.dataset.volume;
-
-      invariant(targetVal, "target value not defined");
+      // invariant(stage.current, "canvas not initiated");
+      const targetVal: string | undefined = stage.current?.dataset.volume;
+      if (!targetVal) return;
+      // invariant(targetVal, "target value not defined");
       const targetValNum: number = parseInt(targetVal, 10);
 
       // Gradual approach

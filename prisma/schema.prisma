@@ -10,11 +10,10 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  userName      String          @unique
-  passwordHash  String
-  mixSettings   MixSettings[]
-  trackSettings TrackSettings[]
+  id           String        @id @default(uuid())
+  userName     String        @unique
+  passwordHash String
+  mixSettings  MixSettings[]
 }
 
 model Song {
@@ -41,22 +40,21 @@ model Track {
 }
 
 model MixSettings {
-  id               String           @id @default(uuid())
-  songSlug         String
-  mixName          String           @unique
-  artistPhoto      String           @default("default")
-  coverArt         String           @default("0")
-  private          Boolean          @default(false)
-  likes            Int              @default(0)
-  volume           Float            @default(-32)
-  automationDataId String?
-  trackSettings    TrackSettings[]
-  user             User?            @relation(fields: [userName], references: [userName], onDelete: Cascade)
-  userId           String
-  userName         String
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  automationData   AutomationData[]
+  id             String           @id @default(uuid())
+  songSlug       String
+  mixName        String           @unique
+  artistPhoto    String           @default("default")
+  coverArt       String           @default("0")
+  private        Boolean          @default(false)
+  likes          Int              @default(0)
+  volume         Float            @default(-32)
+  user           User?            @relation(fields: [userName], references: [userName], onDelete: Cascade)
+  userId         String
+  userName       String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  trackSettings  TrackSettings[]
+  automationData AutomationData[]
 }
 
 model TrackSettings {
@@ -88,14 +86,12 @@ model TrackSettings {
 
   mixSettings   MixSettings @relation(fields: [mixSettingsId], references: [id], onDelete: Cascade)
   mixSettingsId String
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String
 }
 
 model AutomationData {
-  id            String      @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  data          String
-  mixSettingsId String
-  mixSettings   MixSettings @relation(fields: [mixSettingsId], references: [id], onDelete: Cascade)
+  data          Json
+  MixSettings   MixSettings? @relation(fields: [mixSettingsId], references: [id], onDelete: Cascade)
+  mixSettingsId String?
 }

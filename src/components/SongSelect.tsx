@@ -5,11 +5,13 @@ import {
   blueMonday,
   ninteenOne,
 } from "@/assets/songs";
+import { useRouter } from "next/router";
 import { localStorageSet } from "@/utils";
 import { defaultTrackData } from "@/assets/songs/defaultData";
 import { MixerMachineContext } from "@/context/MixerMachineContext";
 
 function SongSelect() {
+  const router = useRouter();
   const { send } = MixerMachineContext.useActorRef();
   function onChange(e: React.FormEvent<HTMLSelectElement>): void {
     switch (e.currentTarget.value) {
@@ -46,6 +48,7 @@ function SongSelect() {
           type: "LOAD_SONG",
           value: justDance,
         });
+        router.push("/justDance");
         break;
       }
 
