@@ -28,31 +28,6 @@ function App(props) {
   const { send } = MixerMachineContext.useActorRef();
 
   function onChange(e: React.FormEvent<HTMLSelectElement>): void {
-    // switch (e.currentTarget.value) {
-    //   case "ninteenOne": {
-    //     router.push("/ninteenOne");
-    //     break;
-    //   }
-    //   case "roxanne": {
-    //     router.push("/roxanne");
-    //     break;
-    //   }
-    //   case "aDayInTheLife": {
-    //     router.push("/aDayInTheLife");
-    //     break;
-    //   }
-    //   case "blueMonday": {
-    //     router.push("/blueMonday");
-    //     break;
-    //   }
-    //   case "justDance": {
-    //     router.push("/justDance");
-    //     break;
-    //   }
-    //   default:
-    //     break;
-    // }
-
     const selectSong = {
       ninteenOne: () => router.push("/ninteenOne"),
       roxanne: () => router.push("/roxanne"),
@@ -60,13 +35,10 @@ function App(props) {
       blueMonday: () => router.push("/blueMonday"),
       justDance: () => router.push("/justDance"),
     };
-
     selectSong[e.currentTarget.value as keyof typeof selectSong]();
   }
 
   return (
-    // <MixerMachineContext.Provider>
-    // <SongSelect />
     <select name="songs" id="song-select" onChange={onChange}>
       <option value="">Choose a song:</option>
       <option value="ninteenOne">Phoenix - 1901</option>
@@ -75,7 +47,6 @@ function App(props) {
       <option value="blueMonday">New Order - Blue Monday</option>
       <option value="justDance">Lady Gaga - Just Dance</option>
     </select>
-    // </MixerMachineContext.Provider>
   );
 }
 
