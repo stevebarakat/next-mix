@@ -12,7 +12,7 @@ import {
 type Props = {
   trackId: number;
   fxId: number;
-  param: "delay" | "reverb" | "pitchShift";
+  param: any;
 };
 
 function PlaybackMode({ trackId, fxId, param }: Props) {
