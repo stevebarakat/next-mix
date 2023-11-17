@@ -12,7 +12,7 @@ import {
   ninteenOne,
 } from "@/assets/songs";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const prisma = new PrismaClient();
 
   const sourceSong = prisma.song;
