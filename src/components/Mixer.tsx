@@ -10,7 +10,12 @@ import { MixerMachineContext } from "@/context/MixerMachineContext";
 import { roxanne } from "@/assets/songs";
 import { useEffect } from "react";
 
-export const Mixer = ({ currentTracks, sourceSong }) => {
+type Props = {
+  currentTracks: TrackSettings[];
+  sourceSong: SourceSong;
+};
+
+export const Mixer = ({ currentTracks, sourceSong }: Props) => {
   const { currentMain } = MixerMachineContext.useSelector(
     (state) => state.context
   );
