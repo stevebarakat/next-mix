@@ -25,7 +25,6 @@ function PlaybackMode({ trackId, fxId, param }: Props) {
   function setPlaybackMode(e: React.FormEvent<HTMLInputElement>): void {
     send({
       type: "SET_FX_PLAYBACK_MODE",
-      checked: e.currentTarget.checked,
       value: e.currentTarget.value,
       param,
       trackId,
