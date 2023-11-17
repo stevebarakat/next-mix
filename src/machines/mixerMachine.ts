@@ -84,7 +84,7 @@ export const mixerMachine = createMachine(
     schema: {
       context: {} as typeof initialContext,
       events: {} as
-        | { type: "LOAD_SONG" }
+        | { type: "LOAD_SONG"; value: SourceSong }
         | { type: "LOADED" }
         | { type: "PLAY" }
         | { type: "PAUSE" }
