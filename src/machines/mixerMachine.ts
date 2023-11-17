@@ -201,7 +201,7 @@ export const mixerMachine = createMachine(
         | {
             type: "SET_FX_PLAYBACK_MODE";
             value: string;
-            param: "volume" | "pan" | "soloMute";
+            param: "reverb" | "pitchShift" | "delay";
             trackId: number;
           },
     },
